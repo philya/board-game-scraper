@@ -80,6 +80,14 @@ FEED_EXPORT_FIELDS = (
     "lowest_language_dependency",
     "highest_language_dependency",
     "bgg_id",
+
+    "owned",
+    "trading",
+    "wanting",
+    "wishing",
+    "num_comments",
+    "complexity_votes",
+
     "freebase_id",
     "wikidata_id",
     "wikipedia_id",
@@ -147,21 +155,21 @@ ROBOTSTXT_OBEY = parse_bool(os.getenv("ROBOTSTXT_OBEY") or True)
 ROBOTSTXT_PARSER = "scrapy.robotstxt.PythonRobotParser"
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-# CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 1
 
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 0.1
+DOWNLOAD_DELAY = 1
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 8
+CONCURRENT_REQUESTS_PER_DOMAIN = 1
 # CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
 # COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
-# TELNETCONSOLE_ENABLED = False
+TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
@@ -235,7 +243,7 @@ HTTPCACHE_POLICY = "scrapy.extensions.httpcache.RFC2616Policy"
 RETRY_ENABLED = True
 RETRY_HTTP_CODES = (500, 502, 503, 504, 408, 429)
 
-DELAYED_RETRY_ENABLED = False
+DELAYED_RETRY_ENABLED = True
 DELAYED_RETRY_TIMES = -1
 DELAYED_RETRY_HTTP_CODES = ()
 DELAYED_RETRY_DELAY = 10.0
@@ -250,9 +258,9 @@ DUMP_STATS_ENABLED = True
 DUMP_STATS_INTERVAL = 5 * 60
 
 # Spider settings
-SCRAPE_BGG_RATINGS = True
-SCRAPE_BGG_COLLECTIONS = True
-SCRAPE_BGG_USERS = True
+SCRAPE_BGG_RATINGS = False
+SCRAPE_BGG_COLLECTIONS = False
+SCRAPE_BGG_USERS = False
 
 # State tags
 STATE_TAG_FILE = ".state"

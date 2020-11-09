@@ -558,6 +558,14 @@ class BggSpider(Spider):
             ldr.add_xpath("avg_rating", "statistics/ratings/average/@value")
             ldr.add_xpath("stddev_rating", "statistics/ratings/stddev/@value")
             ldr.add_xpath("bayes_rating", "statistics/ratings/bayesaverage/@value")
+
+            ldr.add_xpath("owned", "statistics/ratings/owned/@value")
+            ldr.add_xpath("trading", "statistics/ratings/trading/@value")
+            ldr.add_xpath("wanting", "statistics/ratings/wanting/@value")
+            ldr.add_xpath("wishing", "statistics/ratings/wishing/@value")
+            ldr.add_xpath("num_comments", "statistics/ratings/numcomments/@value")
+            ldr.add_xpath("complexity_votes", "statistics/ratings/numweights/@value")
+
             ldr.add_xpath("complexity", "statistics/ratings/averageweight/@value")
             ldr.add_value(
                 "language_dependency",

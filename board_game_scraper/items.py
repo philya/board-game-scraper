@@ -416,6 +416,49 @@ class GameItem(TypedItem):
         default=None,
     )
 
+    owned = Field(
+        dtype=int,
+        dtype_convert=parse_int,
+        input_processor=NN_INT_PROCESSOR,
+        default=None,
+    )
+
+    trading = Field(
+        dtype=int,
+        dtype_convert=parse_int,
+        input_processor=NN_INT_PROCESSOR,
+        default=None,
+    )
+
+    wanting = Field(
+        dtype=int,
+        dtype_convert=parse_int,
+        input_processor=NN_INT_PROCESSOR,
+        default=None,
+    )
+
+    wishing = Field(
+        dtype=int,
+        dtype_convert=parse_int,
+        input_processor=NN_INT_PROCESSOR,
+        default=None,
+    )
+
+    num_comments = Field(
+        dtype=int,
+        dtype_convert=parse_int,
+        input_processor=NN_INT_PROCESSOR,
+        default=None,
+    )
+
+    complexity_votes = Field(
+        dtype=int,
+        dtype_convert=parse_int,
+        input_processor=NN_INT_PROCESSOR,
+        default=None,
+    )
+
+
     bgg_id = Field(
         dtype=int,
         dtype_convert=parse_int,
