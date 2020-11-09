@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+#Virtualenv
+bgs/
+
 # Distribution / packaging
 .Python
 env/
@@ -103,6 +106,7 @@ bin/
 include/
 share/
 pip-selfcheck.json
+*.sublime-*
 
 .tc/
 analytics/
