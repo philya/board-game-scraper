@@ -102,8 +102,9 @@ class BggSpider(Spider):
     allowed_domains = ("boardgamegeek.com",)
     start_urls = (
         "https://boardgamegeek.com/browse/boardgame/",
-        "https://boardgamegeek.com/browse/user/numreviews",
-        "https://boardgamegeek.com/browse/user/numsessions",
+        #"https://boardgamegeek.com/browse/boardgame/page/1100",
+        #"https://boardgamegeek.com/browse/user/numreviews",
+        #"https://boardgamegeek.com/browse/user/numsessions",
     )
     item_classes = (GameItem, UserItem, RatingItem)
     state = None
@@ -113,12 +114,12 @@ class BggSpider(Spider):
     page_size = 100
 
     custom_settings = {
-        "DOWNLOAD_DELAY": 0.5,
-        "CONCURRENT_REQUESTS_PER_DOMAIN": 8,
-        "AUTOTHROTTLE_TARGET_CONCURRENCY": 4,
+        "DOWNLOAD_DELAY": 2,
+        "CONCURRENT_REQUESTS_PER_DOMAIN": 1,
+        "AUTOTHROTTLE_TARGET_CONCURRENCY": 1,
         "DELAYED_RETRY_ENABLED": True,
-        "DELAYED_RETRY_HTTP_CODES": (202,),
-        "DELAYED_RETRY_DELAY": 5.0,
+        "DELAYED_RETRY_HTTP_CODES": (202, 429),
+        "DELAYED_RETRY_DELAY": 15.0,
         "AUTOTHROTTLE_HTTP_CODES": (429, 503, 504),
         "PULL_QUEUE_ENABLED": True,
         "LIMIT_IMAGES_TO_DOWNLOAD": parse_int(os.getenv("LIMIT_IMAGES_TO_DOWNLOAD_BGG"))

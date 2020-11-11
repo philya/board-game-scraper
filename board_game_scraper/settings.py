@@ -185,7 +185,10 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {"scrapy_extensions.DelayedRetry": 555}
+DOWNLOADER_MIDDLEWARES = {
+    "scrapy.downloadermiddlewares.retry.RetryMiddleware": 555,
+    #"scrapy_extensions.DelayedRetry": 555
+}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -193,8 +196,8 @@ EXTENSIONS = {
     "scrapy.extensions.closespider.CloseSpider": 0,
     "scrapy.extensions.feedexport.FeedExporter": None,
     "scrapy_extensions.MultiFeedExporter": 0,
-    "scrapy.extensions.throttle.AutoThrottle": None,
-    "scrapy_extensions.NicerAutoThrottle": 0,
+    "scrapy.extensions.throttle.AutoThrottle": 0,
+    "scrapy_extensions.NicerAutoThrottle": None,
     "board_game_scraper.extensions.StateTag": 0,
     "board_game_scraper.extensions.DontRunBeforeTag": 0,
     "board_game_scraper.extensions.PullQueueExtension": 100,
@@ -223,13 +226,13 @@ AUTOTHROTTLE_ENABLED = True
 # The initial download delay
 AUTOTHROTTLE_START_DELAY = max(DOWNLOAD_DELAY * 2, 5)
 # The maximum download delay to be set in case of high latencies
-AUTOTHROTTLE_MAX_DELAY = 60
+AUTOTHROTTLE_MAX_DELAY = 60 * 10
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
 AUTOTHROTTLE_TARGET_CONCURRENCY = CONCURRENT_REQUESTS_PER_DOMAIN
 # Enable showing throttling stats for every response received:
 AUTOTHROTTLE_DEBUG = False
-AUTOTHROTTLE_HTTP_CODES = (429,)
+AUTOTHROTTLE_HTTP_CODES = (500, 502, 503, 504, 408, 429)
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
@@ -242,11 +245,12 @@ HTTPCACHE_POLICY = "scrapy.extensions.httpcache.RFC2616Policy"
 
 RETRY_ENABLED = True
 RETRY_HTTP_CODES = (500, 502, 503, 504, 408, 429)
+RETRY_TIMES = 1000
 
-DELAYED_RETRY_ENABLED = True
+DELAYED_RETRY_ENABLED = False
 DELAYED_RETRY_TIMES = -1
-DELAYED_RETRY_HTTP_CODES = ()
-DELAYED_RETRY_DELAY = 10.0
+DELAYED_RETRY_HTTP_CODES = (500, 502, 503, 504, 408, 429)
+DELAYED_RETRY_DELAY = 15.0
 DELAYED_RETRY_PRIORITY_ADJUST = 0
 DELAYED_RETRY_BACKOFF = True
 DELAYED_RETRY_BACKOFF_MAX_DELAY = 100.0
